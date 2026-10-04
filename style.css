@@ -89,6 +89,27 @@ h6,
 }
 
 /* --- Navbar --- */
+#mainNavbar {
+  transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.4s ease, border-bottom 0.4s ease;
+}
+
+#mainNavbar.scrolled {
+  top: 28px !important;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--color-border);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 1);
+}
+
+#mainNavbar.scrolled #navbarInner {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+#navbarInner {
+  transition: padding 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .nav-pill {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
@@ -153,7 +174,7 @@ h6,
 .btn-hero-primary:active,
 .clay-btn-red:active {
   box-shadow: 0px 0px 0 rgba(153, 0, 0, 0.3);
-  transform: translateY(0) translateX(0);
+  transform: translateY(0) translateX(0) scale(0.96);
 }
 
 .btn-secondary,
@@ -186,7 +207,7 @@ h6,
 .btn-hero-secondary:active,
 .clay-btn-yellow:active {
   box-shadow: 0px 0px 0 rgba(0, 0, 0, 1);
-  transform: translateY(0) translateX(0);
+  transform: translateY(0) translateX(0) scale(0.96);
 }
 
 /* Specific yellow button override for Premium */
@@ -525,10 +546,19 @@ h6,
 }
 
 /* Layout Utilities & Animations */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
 .scroll-reveal {
   opacity: 0;
   transform: translateY(40px) scale(0.95);
-  transition: opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .scroll-reveal.is-revealed {
@@ -536,8 +566,58 @@ h6,
   transform: translateY(0) scale(1);
 }
 
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px) scale(0.95);
+  transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-left.is-revealed {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px) scale(0.95);
+  transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Stagger Delays for Sequences */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+@keyframes fadeInCute {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.fade-in {
+  animation: fadeInCute 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 /* Image continuous rotation */
 @keyframes slowSpin {
+
   from {
     transform: rotate(0deg);
   }
@@ -576,6 +656,28 @@ h6,
 
 .animate-float-dynamic {
   animation: floatDynamic 6s ease-in-out infinite;
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+.animate-float {
+  animation: floatSoft 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes wiggleCute {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg) scale(1.1); }
+  50% { transform: rotate(8deg) scale(1.1); }
+  75% { transform: rotate(-4deg) scale(1.05); }
+}
+
+.clay-card:hover .animate-float,
+.plate-container:hover span {
+  animation: wiggleCute 0.6s ease-in-out;
 }
 
 /* Catering Filters */
