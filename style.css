@@ -783,6 +783,13 @@ h6,
   backdrop-filter: blur(10px);
 }
 
+#mobileMenu.menu-open {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+}
+
 .mobile-menu-item {
   font-family: var(--font-heading);
   font-size: 24px;
