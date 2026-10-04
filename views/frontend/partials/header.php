@@ -43,15 +43,15 @@ $isHome          = $currentPage === 'home';
             class="flex justify-between items-center py-3 px-4 sm:py-5 sm:px-6 md:py-8 lg:py-10 md:px-[30px] lg:px-[150px] max-w-[1600px] mx-auto w-full">
 
             <div class="relative z-[60]">
-                <a href="/"><img id="navLogo" src="assets/logo.png" alt="Bondor Bati" class="h-10 sm:h-12 md:h-16 w-auto object-contain" /></a>
+                <a href="<?= (isset($currentPage) && $currentPage === 'home') ? '#home' : 'index.php' ?>"><img id="navLogo" src="assets/logo.png" alt="Bondor Bati" class="h-10 sm:h-12 md:h-16 w-auto object-contain" /></a>
             </div>
 
             <!-- Desktop Nav -->
             <div class="hidden lg:flex nav-pill items-center gap-3 px-5 py-2.5">
-                <a href="/" class="nav-item" data-section="home" id="nav-home">Home</a>
-                <a href="<?= $isHome ? '#menu'    : '/#menu'    ?>" class="nav-item" data-section="menu" id="nav-menu">Menu</a>
-                <a href="<?= $isHome ? '#about'   : '/#about'   ?>" class="nav-item" data-section="about" id="nav-about">Our Story</a>
-                <a href="<?= $isHome ? '#contact' : '/#contact' ?>" class="nav-item" data-section="contact" id="nav-contact">Contact Us</a>
+                <a href="<?= (isset($currentPage) && $currentPage === 'home') ? '#home' : 'index.php' ?>" class="nav-item" data-section="home" id="nav-home">Home</a>
+                <a href="<?= (isset($currentPage) && $currentPage === 'home') ? '#menu'    : 'index.php#menu'    ?>" class="nav-item" data-section="menu" id="nav-menu">Menu</a>
+                <a href="<?= (isset($currentPage) && $currentPage === 'home') ? '#about'   : 'index.php#about'   ?>" class="nav-item" data-section="about" id="nav-about">Our Story</a>
+                <a href="<?= (isset($currentPage) && $currentPage === 'home') ? '#contact' : 'index.php#contact' ?>" class="nav-item" data-section="contact" id="nav-contact">Contact Us</a>
                 <button id="cartButton" type="button" aria-label="Open shopping cart"
                     class="relative ml-3 cursor-pointer group flex items-center justify-center w-9 h-9 bg-[#1a1a1d] rounded-full shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5),_0px_1px_1px_rgba(255,255,255,0.05)] hover:bg-[#25252a] transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
