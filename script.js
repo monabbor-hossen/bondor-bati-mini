@@ -307,19 +307,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mobileMenuBtn?.addEventListener('click', toggleMenu);
 
-    mobileMenu?.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (!link.classList.contains('clay-btn-red')) {
-                mobileMenu.querySelectorAll('a').forEach(l => l.classList.remove('mobile-menu-active'));
-                link.classList.add('mobile-menu-active');
-            }
-            isMenuOpen = false;
-            mobileMenu.classList.remove('menu-open');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            document.body.style.overflow = 'auto';
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!link.classList.contains('clay-btn-red')) {
+                    mobileMenu.querySelectorAll('a').forEach(l => l.classList.remove('mobile-menu-active'));
+                    link.classList.add('mobile-menu-active');
+                }
+                isMenuOpen = false;
+                mobileMenu.classList.remove('menu-open');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
         });
-    });
+    }
 
     // Scroll Reveal — Intersection Observer
     const revealObserver = new IntersectionObserver((entries) => {
