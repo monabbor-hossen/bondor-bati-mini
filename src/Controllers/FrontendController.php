@@ -1,0 +1,20 @@
+<?php
+namespace App\Controllers;
+
+use App\Infrastructure\Persistence\MySQL\ConnectionFactory;
+use PDO;
+
+class FrontendController {
+    public function index() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['csrf_token'] ??= bin2hex(random_bytes(32));
+        
+        $db = ConnectionFactory::create();
+        $stmt = $db->query('SELECT * FROM catering_menus WHERE is_active = 1 ORDER BY FIELD(category, "regular", "premium", "holud", "bride", "box"), id ASC');
+        $cateringMenus = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        require __DIR__ . '/../../views/frontend/home.php';
+    }
+}
