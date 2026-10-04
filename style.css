@@ -21,6 +21,10 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-body);
   background-color: var(--color-base);
