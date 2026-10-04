@@ -23,7 +23,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 140px;
+  scroll-padding-top: 150px;
 }
 
 body {
@@ -167,8 +167,15 @@ h6,
 }
 
 @keyframes navUnderlineIn {
-  from { width: 0; opacity: 0; }
-  to   { width: 16px; opacity: 1; }
+  from {
+    width: 0;
+    opacity: 0;
+  }
+
+  to {
+    width: 16px;
+    opacity: 1;
+  }
 }
 
 /* --- Buttons --- */
@@ -576,8 +583,13 @@ h6,
 
 /* Layout Utilities & Animations */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -629,15 +641,36 @@ h6,
 }
 
 /* Stagger Delays for Sequences */
-.delay-100 { transition-delay: 100ms; }
-.delay-200 { transition-delay: 200ms; }
-.delay-300 { transition-delay: 300ms; }
-.delay-400 { transition-delay: 400ms; }
-.delay-500 { transition-delay: 500ms; }
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
 
 @keyframes fadeInCute {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .fade-in {
@@ -688,8 +721,15 @@ h6,
 }
 
 @keyframes floatSoft {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(3deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
 }
 
 .animate-float {
@@ -698,10 +738,23 @@ h6,
 }
 
 @keyframes wiggleCute {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-8deg) scale(1.1); }
-  50% { transform: rotate(8deg) scale(1.1); }
-  75% { transform: rotate(-4deg) scale(1.05); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-8deg) scale(1.1);
+  }
+
+  50% {
+    transform: rotate(8deg) scale(1.1);
+  }
+
+  75% {
+    transform: rotate(-4deg) scale(1.05);
+  }
 }
 
 .clay-card:hover .animate-float,
