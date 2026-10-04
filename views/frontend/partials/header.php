@@ -48,10 +48,10 @@ $isHome          = $currentPage === 'home';
 
             <!-- Desktop Nav -->
             <div class="hidden lg:flex nav-pill items-center gap-3 px-5 py-2.5">
-                <a href="/" class="<?= $isHome ? 'nav-item-active' : 'nav-item' ?>">Home</a>
-                <a href="<?= $isHome ? '#menu'    : '/#menu'    ?>" class="nav-item">Menu</a>
-                <a href="<?= $isHome ? '#about'   : '/#about'   ?>" class="nav-item">Our Story</a>
-                <a href="<?= $isHome ? '#contact' : '/#contact' ?>" class="nav-item">Contact Us</a>
+                <a href="/" class="nav-item" data-section="home" id="nav-home">Home</a>
+                <a href="<?= $isHome ? '#menu'    : '/#menu'    ?>" class="nav-item" data-section="menu" id="nav-menu">Menu</a>
+                <a href="<?= $isHome ? '#about'   : '/#about'   ?>" class="nav-item" data-section="about" id="nav-about">Our Story</a>
+                <a href="<?= $isHome ? '#contact' : '/#contact' ?>" class="nav-item" data-section="contact" id="nav-contact">Contact Us</a>
                 <button id="cartButton" type="button" aria-label="Open shopping cart"
                     class="relative ml-3 cursor-pointer group flex items-center justify-center w-9 h-9 bg-[#1a1a1d] rounded-full shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5),_0px_1px_1px_rgba(255,255,255,0.05)] hover:bg-[#25252a] transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
@@ -85,3 +85,15 @@ $isHome          = $currentPage === 'home';
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-white/95 backdrop-blur-xl z-[90] flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none invisible transform -translate-y-4 transition-all duration-300 ease-in-out lg:hidden">
+        <img src="assets/logo.png" alt="Bondor Bati" class="h-16 w-auto object-contain mb-6" />
+        <a href="/" class="mobile-menu-item" data-section="home">Home</a>
+        <a href="<?= $isHome ? '#menu' : '/#menu' ?>" class="mobile-menu-item" data-section="menu">Menu</a>
+        <a href="<?= $isHome ? '#about' : '/#about' ?>" class="mobile-menu-item" data-section="about">Our Story</a>
+        <a href="<?= $isHome ? '#contact' : '/#contact' ?>" class="mobile-menu-item" data-section="contact">Contact Us</a>
+        <a href="<?= $isHome ? '#menu' : '/#menu' ?>"
+            class="clay-btn-red text-center px-8 py-3.5 text-lg font-nunito-bold tracking-wide mt-6 w-4/5 max-w-[280px] text-white"
+            style="text-decoration: none;">Order Now</a>
+    </div>

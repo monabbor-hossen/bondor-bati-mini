@@ -346,6 +346,39 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', handleNavbarScroll, { passive: true });
     handleNavbarScroll();
 
+    // ScrollSpy for Active Nav Links
+    const spySections = document.querySelectorAll('#home, #menu, #about, #contact');
+    const navLinks = document.querySelectorAll('.nav-pill [data-section], #mobileMenu [data-section]');
+
+    const navSpyObserver = new IntersectionObserver((entries) => {
+        let activeId = null;
+        // Find the most intersecting section
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                activeId = entry.target.id;
+            }
+        });
+
+        if (activeId) {
+            navLinks.forEach(link => {
+                const isMobile = link.classList.contains('mobile-menu-item') || link.classList.contains('mobile-menu-active');
+                const baseClass = isMobile ? 'mobile-menu-item' : 'nav-item';
+                const activeClass = isMobile ? 'mobile-menu-active' : 'nav-item-active';
+                
+                if (link.dataset.section === activeId) {
+                    link.classList.add(activeClass);
+                    link.classList.remove(baseClass);
+                } else {
+                    link.classList.remove(activeClass);
+                    link.classList.add(baseClass);
+                }
+            });
+        }
+    }, { threshold: 0.2, rootMargin: '-100px 0px -40% 0px' });
+
+    spySections.forEach(sec => navSpyObserver.observe(sec));
+
+
     // Custom Cursor & Magnetic Interactions
     if (window.matchMedia("(pointer: fine)").matches) {
         const cursor = document.createElement('div');

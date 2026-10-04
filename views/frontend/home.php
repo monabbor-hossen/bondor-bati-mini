@@ -12,20 +12,10 @@ require __DIR__ . '/partials/header.php';
         <!-- Dashboard card container to match the reference image style -->
         <div class="dashboard-container w-full flex flex-col relative mb-12 sm:mb-16 mt-2 sm:mt-6 overflow-hidden">
 
-            <div id="mobileMenu"
-                class="fixed inset-0 bg-white/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center gap-6 opacity-0 pointer-events-none invisible transform -translate-y-4 transition-all duration-300 ease-in-out lg:hidden">
-                <img src="assets/logo.png" alt="Bondor Bati" class="h-16 w-auto object-contain mb-6" />
-                <a href="#" class="mobile-menu-item mobile-menu-active">Home</a>
-                <a href="#menu" class="mobile-menu-item">Menu</a>
-                <a href="#about" class="mobile-menu-item">Our Story</a>
-                <a href="#contact" class="mobile-menu-item">Contact Us</a>
-                <a href="#menu"
-                    class="clay-btn-red text-center px-8 py-3.5 text-lg font-nunito-bold tracking-wide mt-6 w-4/5 max-w-[280px] text-white"
-                    style="text-decoration: none;">Order Now</a>
-            </div>
+
 
             <!-- হিরো সেকশন -->
-            <main
+            <main id="home"
                 class="flex flex-col lg:flex-row items-center justify-between relative z-10 gap-6 sm:gap-10 lg:gap-0 mt-2 md:mt-0 pt-14 sm:pt-18 md:pt-22 pb-4 md:pb-8 px-2 sm:px-6 md:px-10 min-h-0">
                 <div
                     class="w-full lg:w-3/6 flex flex-col items-center lg:items-start justify-center text-center lg:text-left h-full reveal-left">
