@@ -77,3 +77,96 @@
             </div>
         </div>
 
+<!-- ── Menu Item Modal ─────────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="menuModal">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="modal-title" id="menuModalTitle">Add Menu Item</span>
+            <button class="modal-close" id="menuModalClose">×</button>
+        </div>
+        <form method="POST" action="index.php?page=menu" id="menuItemForm">
+            <input type="hidden" name="_action" value="save_menu_item">
+            <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
+            <input type="hidden" name="_page" value="menu">
+            <input type="hidden" name="id" id="menuItemId" value="">
+
+            <div class="form-grid">
+                <div class="form-group full">
+                    <label class="form-label" for="mi_name">Item Name</label>
+                    <input class="form-control" id="mi_name" name="name" required placeholder="e.g. সোনালী মুরগি ভুনা">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="mi_day">Day</label>
+                    <select class="form-control" id="mi_day" name="day_index" required>
+                        <?php foreach ($dayNames as $idx => $label): ?>
+                            <option value="<?= e($idx) ?>"><?= e($label) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="mi_tier">Tier</label>
+                    <select class="form-control" id="mi_tier" name="tier" required>
+                        <option value="standard">Standard</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="mi_price">Price (৳)</label>
+                    <input class="form-control" id="mi_price" name="price" type="number" min="1" max="99999" required placeholder="135">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="mi_emoji">Emoji</label>
+                    <input class="form-control" id="mi_emoji" name="emoji" required placeholder="🍗">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label" for="mi_desc">Description</label>
+                    <textarea class="form-control" id="mi_desc" name="description" required placeholder="ভাত (মিনিকেট), সোনালী মুরগি ভুনা, ভর্তা/ভাজি, ঘন ডাল, সালাদ।"></textarea>
+                </div>
+                <!-- hidden day_name synced via JS -->
+                <input type="hidden" name="day_name" id="mi_day_name">
+            </div>
+
+            <div style="display:flex;gap:.75rem;margin-top:1.25rem;justify-content:flex-end;">
+                <button type="button" class="btn btn-ghost" id="menuModalCancel">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Item</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+// ── Day name sync
+const dayNames = <?= json_encode(array_values(array_map(fn($v) => explode(' ', $v)[0], $dayNames)), JSON_UNESCAPED_UNICODE) ?>;
+const dayIndexEl  = document.getElementById('mi_day');
+const dayNameEl   = document.getElementById('mi_day_name');
+function syncDayName() { if (dayIndexEl && dayNameEl) dayNameEl.value = dayNames[dayIndexEl.value] || ''; }
+dayIndexEl?.addEventListener('change', syncDayName);
+
+// ── Menu item modal
+const modal       = document.getElementById('menuModal');
+const modalTitle  = document.getElementById('menuModalTitle');
+const modalIdInput= document.getElementById('menuItemId');
+
+function openModal() { modal.classList.add('open'); }
+function closeModal() { modal.classList.remove('open'); document.getElementById('menuItemForm').reset(); modalIdInput.value = ''; modalTitle.textContent = 'Add Menu Item'; syncDayName(); }
+
+document.getElementById('addMenuBtn')?.addEventListener('click', () => { closeModal(); openModal(); });
+document.getElementById('menuModalClose')?.addEventListener('click', closeModal);
+document.getElementById('menuModalCancel')?.addEventListener('click', closeModal);
+modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+document.querySelectorAll('.edit-menu-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        modalTitle.textContent = 'Edit Menu Item';
+        modalIdInput.value = btn.dataset.id;
+        document.getElementById('mi_name').value        = btn.dataset.name;
+        document.getElementById('mi_day').value         = btn.dataset.day_index;
+        document.getElementById('mi_tier').value        = btn.dataset.tier;
+        document.getElementById('mi_price').value       = btn.dataset.price;
+        document.getElementById('mi_emoji').value       = btn.dataset.emoji;
+        document.getElementById('mi_desc').value        = btn.dataset.description;
+        syncDayName();
+        openModal();
+    });
+});
+</script>

@@ -268,7 +268,7 @@ require __DIR__ . '/partials/header.php';
                     <div class="flex items-center gap-3 mt-auto">
                         <div class="w-10 h-10 rounded-full bg-[#af0202] flex items-center justify-center text-white font-nunito-bold">T</div>
                         <div>
-                            <h4 class="text-white font-nunito-bold text-sm">Tanvir Ahmed</h4>
+                            <h4 class="text-gray-900 font-nunito-bold text-sm">Tanvir Ahmed</h4>
                             <span class="text-[#777] text-xs">Weekly Tiffin</span>
                         </div>
                     </div>

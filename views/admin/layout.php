@@ -93,7 +93,7 @@
     </div>
 
     <div class="sidebar-footer">
-        <form method="POST" action="index.php">
+        <form method="POST" action="">
             <input type="hidden" name="_action" value="logout">
             <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
             <button class="btn-logout" type="submit">
@@ -146,5 +146,6 @@
 <?= $pageContent ?>
     </div><!-- /content -->
 </div><!-- /main -->
+<script src="../assets/js/admin-global.js"></script>
 </body>
 </html>

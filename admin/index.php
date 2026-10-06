@@ -17,6 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
         'samesite' => 'Lax',
         'path'     => '/',
     ]);
+    session_start(); // Start HERE so bootstrap.php skips it
 }
 
 require dirname(__DIR__) . '/bootstrap.php';

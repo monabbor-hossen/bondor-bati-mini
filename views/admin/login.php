@@ -19,7 +19,7 @@
         <div class="alert alert-error"><?= e($flashError) ?></div>
     <?php endif; ?>
 
-    <form method="POST" action="index.php">
+    <form method="POST" action="">
         <input type="hidden" name="_action" value="login">
         <label for="username">Username</label>
         <input id="username" name="username" type="text" autocomplete="username" required placeholder="admin">

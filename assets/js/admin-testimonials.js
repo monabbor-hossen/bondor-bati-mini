@@ -1,56 +1,5 @@
-// ── Mobile sidebar toggle
-const sidebar        = document.getElementById('sidebar');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
-const mobileBtn      = document.getElementById('mobileMenuBtn');
 
-function openSidebar()  {
-    sidebar.classList.add('open');
-    sidebarOverlay.classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-function closeSidebar() {
-    sidebar.classList.remove('open');
-    sidebarOverlay.classList.remove('show');
-    document.body.style.overflow = '';
-}
 
-mobileBtn?.addEventListener('click', () => sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
-sidebarOverlay?.addEventListener('click', closeSidebar);
-
-// ── Day name sync
-const dayNames = <?= json_encode(array_values(array_map(fn($v) => explode(' ', $v)[0], $dayNames)), JSON_UNESCAPED_UNICODE) ?>;
-const dayIndexEl  = document.getElementById('mi_day');
-const dayNameEl   = document.getElementById('mi_day_name');
-function syncDayName() { if (dayIndexEl && dayNameEl) dayNameEl.value = dayNames[dayIndexEl.value] || ''; }
-dayIndexEl?.addEventListener('change', syncDayName);
-
-// ── Menu item modal
-const modal       = document.getElementById('menuModal');
-const modalTitle  = document.getElementById('menuModalTitle');
-const modalIdInput= document.getElementById('menuItemId');
-
-function openModal() { modal.classList.add('open'); }
-function closeModal() { modal.classList.remove('open'); document.getElementById('menuItemForm').reset(); modalIdInput.value = ''; modalTitle.textContent = 'Add Menu Item'; syncDayName(); }
-
-document.getElementById('addMenuBtn')?.addEventListener('click', () => { closeModal(); openModal(); });
-document.getElementById('menuModalClose')?.addEventListener('click', closeModal);
-document.getElementById('menuModalCancel')?.addEventListener('click', closeModal);
-modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-document.querySelectorAll('.edit-menu-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        modalTitle.textContent = 'Edit Menu Item';
-        modalIdInput.value = btn.dataset.id;
-        document.getElementById('mi_name').value        = btn.dataset.name;
-        document.getElementById('mi_day').value         = btn.dataset.day_index;
-        document.getElementById('mi_tier').value        = btn.dataset.tier;
-        document.getElementById('mi_price').value       = btn.dataset.price;
-        document.getElementById('mi_emoji').value       = btn.dataset.emoji;
-        document.getElementById('mi_desc').value        = btn.dataset.description;
-        syncDayName();
-        openModal();
-    });
-});
 
 // ── Success Story modal
 const storyModal       = document.getElementById('storyModal');
@@ -75,8 +24,4 @@ document.querySelectorAll('.edit-story-btn').forEach(btn => {
         openStoryModal();
     });
 });
-
-// Auto-dismiss flash messages
-setTimeout(() => {
-    document.querySelectorAll('.alert').forEach(el => { el.style.transition = 'opacity .5s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 500); });
-}, 4000);
+

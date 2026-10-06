@@ -24,7 +24,7 @@
                         <?= e($story['content']) ?>
                     </td>
                     <td>
-                        <form method="POST" action="index.php" style="margin:0;">
+                        <form method="POST" action="?page=testimonials" style="margin:0;">
                             <input type="hidden" name="_action" value="toggle_success_story">
                             <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
                             <input type="hidden" name="_page" value="testimonials">
@@ -42,7 +42,7 @@
                                     data-name="<?= e($story['client_name']) ?>"
                                     data-rating="<?= $story['rating'] ?>"
                                     data-content="<?= e($story['content']) ?>">Edit</button>
-                            <form method="POST" action="index.php" onsubmit="return confirm('Are you sure you want to delete this story?');" style="margin:0;">
+                            <form method="POST" action="?page=testimonials" onsubmit="return confirm('Are you sure you want to delete this story?');" style="margin:0;">
                                 <input type="hidden" name="_action" value="delete_success_story">
                                 <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
                                 <input type="hidden" name="_page" value="testimonials">
@@ -59,62 +59,7 @@
             </div>
         </div>
 
-<!-- ── Menu Item Modal ─────────────────────────────────────────────────────── -->
-<div class="modal-backdrop" id="menuModal">
-    <div class="modal">
-        <div class="modal-header">
-            <span class="modal-title" id="menuModalTitle">Add Menu Item</span>
-            <button class="modal-close" id="menuModalClose">×</button>
-        </div>
-        <form method="POST" action="index.php?page=menu" id="menuItemForm">
-            <input type="hidden" name="_action" value="save_menu_item">
-            <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
-            <input type="hidden" name="_page" value="menu">
-            <input type="hidden" name="id" id="menuItemId" value="">
 
-            <div class="form-grid">
-                <div class="form-group full">
-                    <label class="form-label" for="mi_name">Item Name</label>
-                    <input class="form-control" id="mi_name" name="name" required placeholder="e.g. সোনালী মুরগি ভুনা">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="mi_day">Day</label>
-                    <select class="form-control" id="mi_day" name="day_index" required>
-                        <?php foreach ($dayNames as $idx => $label): ?>
-                            <option value="<?= e($idx) ?>"><?= e($label) ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="mi_tier">Tier</label>
-                    <select class="form-control" id="mi_tier" name="tier" required>
-                        <option value="standard">Standard</option>
-                        <option value="premium">Premium</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="mi_price">Price (৳)</label>
-                    <input class="form-control" id="mi_price" name="price" type="number" min="1" max="99999" required placeholder="135">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="mi_emoji">Emoji</label>
-                    <input class="form-control" id="mi_emoji" name="emoji" required placeholder="🍗">
-                </div>
-                <div class="form-group full">
-                    <label class="form-label" for="mi_desc">Description</label>
-                    <textarea class="form-control" id="mi_desc" name="description" required placeholder="ভাত (মিনিকেট), সোনালী মুরগি ভুনা, ভর্তা/ভাজি, ঘন ডাল, সালাদ।"></textarea>
-                </div>
-                <!-- hidden day_name synced via JS -->
-                <input type="hidden" name="day_name" id="mi_day_name">
-            </div>
-
-            <div style="display:flex;gap:.75rem;margin-top:1.25rem;justify-content:flex-end;">
-                <button type="button" class="btn btn-ghost" id="menuModalCancel">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save Item</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- ── Success Story Modal ─────────────────────────────────────────────────────── -->
 <div class="modal-backdrop" id="storyModal">
@@ -123,7 +68,7 @@
             <span class="modal-title" id="storyModalTitle">Add Success Story</span>
             <button class="modal-close" id="storyModalClose">×</button>
         </div>
-        <form method="POST" action="index.php" id="storyForm">
+        <form method="POST" action="?page=testimonials" id="storyForm">
             <input type="hidden" name="_action" value="save_success_story">
             <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
             <input type="hidden" name="_page" value="testimonials">
@@ -158,4 +103,33 @@
     </div>
 </div>
 
-<script src="../assets/js/admin-testimonials.js"></script>
+<script>
+// ── Success Story modal
+const storyModal       = document.getElementById('storyModal');
+const storyModalTitle  = document.getElementById('storyModalTitle');
+const storyModalIdInput= document.getElementById('storyId');
+
+function openStoryModal() { storyModal.classList.add('open'); }
+function closeStoryModal() { 
+    storyModal.classList.remove('open'); 
+    document.getElementById('storyForm').reset(); 
+    storyModalIdInput.value = ''; 
+    storyModalTitle.textContent = 'Add Success Story'; 
+}
+
+document.getElementById('addStoryBtn')?.addEventListener('click', () => { closeStoryModal(); openStoryModal(); });
+document.getElementById('storyModalClose')?.addEventListener('click', closeStoryModal);
+document.getElementById('storyModalCancel')?.addEventListener('click', closeStoryModal);
+storyModal?.addEventListener('click', (e) => { if (e.target === storyModal) closeStoryModal(); });
+
+document.querySelectorAll('.edit-story-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        storyModalTitle.textContent = 'Edit Success Story';
+        storyModalIdInput.value = btn.dataset.id;
+        document.getElementById('st_client_name').value = btn.dataset.name;
+        document.getElementById('st_rating').value      = btn.dataset.rating;
+        document.getElementById('st_content').value     = btn.dataset.content;
+        openStoryModal();
+    });
+});
+</script>
