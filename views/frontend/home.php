@@ -72,18 +72,18 @@ require __DIR__ . '/partials/header.php';
             <!-- Service Toggle -->
             <div class="service-toggle-container scroll-reveal">
                 <div class="service-toggle-slider" id="serviceSlider"></div>
-                <div class="service-toggle-btn active" id="btnTiffin" onclick="switchService('tiffin')">Weekly Tiffin</div>
-                <div class="service-toggle-btn" id="btnCatering" onclick="switchService('catering')">Event Catering</div>
+                <div class="service-toggle-btn active text-sm sm:text-base whitespace-nowrap" id="btnTiffin" onclick="switchService('tiffin')">Weekly Tiffin</div>
+                <div class="service-toggle-btn text-sm sm:text-base whitespace-nowrap" id="btnCatering" onclick="switchService('catering')">Event Catering</div>
             </div>
 
             <!-- Tiffin Section -->
             <div id="tiffinSection" class="w-full flex flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-3xl sm:text-5xl md:text-[60px] text-gray-900 my-2 sm:my-3 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-2xl sm:text-4xl md:text-5xl text-gray-900 my-2 sm:my-3 text-center scroll-reveal">
                     Weekly Menu
                 </h2>
 
             
-                <div class="bg-gray-100 text-black px-6 py-3 rounded-full font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
+                <div class="bg-gray-100 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
                     <svg class="text-[#CC0000]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     Minimum Order Quantity: 10 Pcs
                 </div>
@@ -99,7 +99,7 @@ require __DIR__ . '/partials/header.php';
                     </svg>
                 </button>
 
-                <div class="flex items-center gap-2 md:gap-5 overflow-x-auto hide-scrollbar px-8 py-8"
+                <div class="flex items-center gap-2 md:gap-5 overflow-x-auto hide-scrollbar px-2 py-4 min-w-0"
                     id="dayTabsContainer">
                     <button class="day-tab clay-tab clay-tab-active" data-index="0">শনি</button>
                     <button class="day-tab clay-tab" data-index="1">রবি</button>
@@ -137,7 +137,7 @@ require __DIR__ . '/partials/header.php';
                         $badgeShadow = $isPremium ? 'shadow-[0_5px_10px_rgba(150,111,20,0.5)]' : 'shadow-[0_5px_10px_rgba(142,21,21,0.5)]';
                         $tierName = ucfirst($item['tier']);
                         
-                        $titleColor = $isPremium ? 'text-yellow-500' : 'text-white';
+                        $titleColor = $isPremium ? 'text-gold' : 'text-primary';
                         $btnClass = $isPremium ? 'clay-btn-yellow' : 'clay-btn-red';
                         
                         $extraPlateBorder = ($isPremium && $dayIndex == 5) ? 'border-[#ff6b6b]/50' : '';
@@ -162,11 +162,11 @@ require __DIR__ . '/partials/header.php';
 
             <!-- Catering Section -->
             <div id="cateringSection" class="w-full hidden flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-5xl md:text-[60px] text-gray-900 my-6 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-2xl sm:text-4xl md:text-5xl text-gray-900 my-6 text-center scroll-reveal">
                     Event Catering
                 </h2>
                 
-                <div class="bg-gray-100 text-black px-6 py-3 rounded-full mb-5 font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
+                <div class="bg-gray-100 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base mb-5 font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
                     <svg class="text-[#CC0000]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     Minimum Order Quantity: 30 Pcs
                 </div>
@@ -199,9 +199,9 @@ require __DIR__ . '/partials/header.php';
                             $borderColor = 'border-[#ff8c00]/40';
                         }
                         
-                        $titleColor = ($m['category'] === 'premium' || $m['category'] === 'bride') ? 'text-[#af0202]' : 'text-gray-900';
+                        $titleColor = ($m['category'] === 'premium' || $m['category'] === 'bride') ? 'text-primary' : 'text-gray-900';
                         if ($m['badge_text'] === 'EXCLUSIVE 7') {
-                            $titleColor = 'text-[#af0202]';
+                            $titleColor = 'text-primary';
                         }
                         
                         $itemsList = array_filter(array_map('trim', explode("\n", $m['items'])));
@@ -234,7 +234,7 @@ require __DIR__ . '/partials/header.php';
         <section class="w-full max-w-6xl mx-auto mb-24 mt-16 px-4 md:px-6">
             <div class="text-center mb-12 scroll-reveal">
                 <p class="commerce-kicker text-[#af0202]">What our clients say</p>
-                <h2 class="font-nunito-black text-4xl md:text-5xl text-gray-900">Success Stories</h2>
+                <h2 class="font-nunito-black text-2xl sm:text-4xl md:text-5xl text-gray-900">Success Stories</h2>
             </div>
             
 

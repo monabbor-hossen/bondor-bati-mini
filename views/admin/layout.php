@@ -147,5 +147,10 @@
     </div><!-- /content -->
 </div><!-- /main -->
 <script src="../assets/js/admin-global.js"></script>
+<?php if ($page === 'menu'): ?>
+<script src="../assets/js/admin-menu.js"></script>
+<?php elseif ($page === 'testimonials'): ?>
+<script src="../assets/js/admin-testimonials.js"></script>
+<?php endif; ?>
 </body>
 </html>
