@@ -109,6 +109,11 @@
 
     <div id="toast" class="commerce-toast" role="status" aria-live="polite"></div>
     <script src="script.js"></script>
+    <?php if (!empty($extraJs)): ?>
+        <?php foreach ((array)$extraJs as $jsFile): ?>
+            <script src="<?= htmlspecialchars($jsFile, ENT_QUOTES, 'UTF-8') ?>"></script>
+        <?php endforeach; ?>
+    <?php endif; ?>
 </body>
 </html>
 

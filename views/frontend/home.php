@@ -2,6 +2,8 @@
 $pageTitle       = 'Bondor Bati - Chittagong Heritage Cuisine | Daily Tiffin & Event Catering';
 $pageDescription = 'Order authentic Chittagong heritage meals from Bondor Bati. Daily tiffin service and event catering delivered to your door.';
 $currentPage     = 'home';
+$extraCss        = ['assets/css/swiper-bundle.min.css'];
+$extraJs         = ['assets/js/swiper-bundle.min.js', 'assets/js/home.js'];
 require __DIR__ . '/partials/header.php';
 ?>
 
@@ -235,64 +237,42 @@ require __DIR__ . '/partials/header.php';
                 <h2 class="font-nunito-black text-4xl md:text-5xl text-gray-900">Success Stories</h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card scroll-reveal delay-100">
-                    <div class="flex gap-1 mb-4 text-[#FFB347]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <p class="text-gray-600 text-[15px] italic mb-6 leading-relaxed">"The Bride Menu was an absolute hit at our wedding! The whole roasted lamb was cooked to perfection and the presentation was exactly what we wanted."</p>
-                    <div class="flex items-center gap-3 mt-auto">
-                        <div class="w-10 h-10 rounded-full bg-[#af0202] flex items-center justify-center text-white font-nunito-bold">S</div>
-                        <div>
-                            <h4 class="text-gray-900 font-nunito-bold text-sm">Sadia Rahman</h4>
-                            <span class="text-gray-500 text-xs">Event Catering</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card scroll-reveal delay-200">
-                    <div class="flex gap-1 mb-4 text-[#FFB347]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <p class="text-[#a0a0a5] text-[15px] italic mb-6 leading-relaxed">"Bondor Bati's Weekly Tiffin feels like a warm hug from home. Authentic Chittagong flavors that I can enjoy at my office desk. Highly recommended!"</p>
-                    <div class="flex items-center gap-3 mt-auto">
-                        <div class="w-10 h-10 rounded-full bg-[#af0202] flex items-center justify-center text-white font-nunito-bold">T</div>
-                        <div>
-                            <h4 class="text-gray-900 font-nunito-bold text-sm">Tanvir Ahmed</h4>
-                            <span class="text-[#777] text-xs">Weekly Tiffin</span>
+            
+            <div class="swiper testimonials-swiper !pb-14 !pt-8 !px-4 -mx-4 md:!px-6 md:-mx-6 lg:!mx-0 lg:!px-4 lg:-mx-4">
+                <div class="swiper-wrapper">
+                    <?php $delay = 100; ?>
+                    <?php foreach ($successStories as $story): ?>
+                    <div class="swiper-slide h-auto">
+                        <div class="testimonial-card flex flex-col h-full scroll-reveal delay-<?= $delay ?>">
+                            <div class="flex gap-1 mb-4 text-[#FFB347]">
+                                <?php for ($i = 0; $i < (int)$story['rating']; $i++): ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <?php endfor; ?>
+                                <?php for ($i = (int)$story['rating']; $i < 5; $i++): ?>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-300"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                <?php endfor; ?>
+                            </div>
+                            <p class="text-gray-600 text-[15px] italic mb-6 leading-relaxed">"<?= htmlspecialchars($story['content'], ENT_QUOTES) ?>"</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-[#af0202] flex items-center justify-center text-white font-nunito-bold">
+                                    <?= strtoupper(substr(htmlspecialchars($story['client_name'], ENT_QUOTES), 0, 1)) ?>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-900 font-nunito-bold text-sm"><?= htmlspecialchars($story['client_name'], ENT_QUOTES) ?></h4>
+                                    <span class="text-gray-500 text-xs">Verified Customer</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <?php $delay += 100; if($delay > 300) $delay = 100; ?>
+                    <?php endforeach; ?>
                 </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card scroll-reveal delay-300">
-                    <div class="flex gap-1 mb-4 text-[#FFB347]">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    </div>
-                    <p class="text-gray-600 text-[15px] italic mb-6 leading-relaxed">"Ordered the Box Menu for our corporate event (50 pax). Smooth delivery, hot food, and everyone loved the Kacchi Biriyani!"</p>
-                    <div class="flex items-center gap-3 mt-auto">
-                        <div class="w-10 h-10 rounded-full bg-[#af0202] flex items-center justify-center text-white font-nunito-bold">F</div>
-                        <div>
-                            <h4 class="text-gray-900 font-nunito-bold text-sm">Fahim Hasan</h4>
-                            <span class="text-gray-500 text-xs">Bulk Order</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-pagination !bottom-0"></div>
             </div>
+            
+
+
         </section>
 
 

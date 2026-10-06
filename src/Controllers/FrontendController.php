@@ -26,6 +26,9 @@ class FrontendController {
             $weeklyMenus[$item['day_index']][] = $item;
         }
         
+        $stmt3 = $db->query('SELECT * FROM success_stories WHERE is_visible = 1 ORDER BY id DESC');
+        $successStories = $stmt3->fetchAll(PDO::FETCH_ASSOC);
+        
         require __DIR__ . '/../../views/frontend/home.php';
     }
 }

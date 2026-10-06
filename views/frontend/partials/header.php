@@ -20,6 +20,11 @@ $isHome          = $currentPage === 'home';
     <meta name="description" content="<?= htmlspecialchars($pageDescription, ENT_QUOTES, 'UTF-8') ?>">
     <script src="assets/js/tailwindcss.js"></script>
     <link rel="stylesheet" href="style.css">
+    <?php if (!empty($extraCss)): ?>
+        <?php foreach ((array)$extraCss as $cssFile): ?>
+            <link rel="stylesheet" href="<?= htmlspecialchars($cssFile, ENT_QUOTES, 'UTF-8') ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
 <body class="bg-white text-gray-900">
 

@@ -871,3 +871,25 @@ h6,
   border-radius: 9999px;
   animation: navUnderlineIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
+/* Unique Brutalist Pagination Styling */
+.testimonials-swiper .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background: #ffffff;
+    border: 2px solid #000000;
+    opacity: 1;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 2px 0 rgba(0,0,0,1);
+    margin: 0 6px !important;
+}
+.testimonials-swiper .swiper-pagination-bullet:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 rgba(0,0,0,1);
+}
+.testimonials-swiper .swiper-pagination-bullet-active {
+    width: 32px;
+    border-radius: 99px;
+    background: #af0202;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 rgba(0,0,0,1);
+}
