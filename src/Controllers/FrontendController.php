@@ -15,7 +15,7 @@ class FrontendController {
         $stmt = $db->query('SELECT * FROM catering_menus WHERE is_active = 1 ORDER BY FIELD(category, "regular", "premium", "holud", "bride", "box"), id ASC');
         $cateringMenus = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        $stmt2 = $db->query('SELECT * FROM menu_items WHERE is_active = 1 ORDER BY day_index ASC, FIELD(tier, "standard", "premium") ASC');
+        $stmt2 = $db->query('SELECT * FROM menu_items WHERE is_available = 1 ORDER BY day_index ASC, FIELD(tier, "standard", "premium") ASC');
         $menuItemsRaw = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         
         $weeklyMenus = [];
