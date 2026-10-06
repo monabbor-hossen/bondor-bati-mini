@@ -119,230 +119,41 @@ require __DIR__ . '/partials/header.php';
             <!-- 2 Cards Display Container -->
             <div id="menuCardsContainer" class="w-full max-w-6xl mx-auto px-2 md:px-6 relative min-h-[500px]" aria-live="polite">
 
-                <!-- Saturday (Day 0) -->
-                <div class="day-content grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 fade-in" data-content="0">
-                    <!-- Standard -->
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50 scroll-reveal delay-100">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍗</span>
+                <?php foreach ($weeklyMenus as $dayIndex => $dayItems): 
+                    $isHidden = $dayIndex === 0 ? '' : 'hidden';
+                    $fadeClass = $dayIndex === 0 ? 'fade-in' : '';
+                ?>
+                <div class="day-content <?= $isHidden ?> grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 <?= $fadeClass ?>" data-content="<?= $dayIndex ?>">
+                    <?php foreach ($dayItems as $itemIndex => $item): 
+                        $isPremium = $item['tier'] === 'premium';
+                        
+                        $cardBorder = $isPremium ? 'border-yellow-600/20 hover:border-yellow-600/50' : 'border-[#af0202]/20 hover:border-[#af0202]/50';
+                        $revealClass = ($dayIndex === 0) ? 'scroll-reveal delay-' . ($itemIndex === 0 ? '100' : '300') : '';
+                        
+                        $badgeBg = $isPremium ? 'bg-[#966f14]' : 'bg-[#8e1515]';
+                        $badgeBorder = $isPremium ? 'border-yellow-400/50' : 'border-[#ff6b6b]/50';
+                        $badgeShadow = $isPremium ? 'shadow-[0_5px_10px_rgba(150,111,20,0.5)]' : 'shadow-[0_5px_10px_rgba(142,21,21,0.5)]';
+                        $tierName = ucfirst($item['tier']);
+                        
+                        $titleColor = $isPremium ? 'text-yellow-500' : 'text-white';
+                        $btnClass = $isPremium ? 'clay-btn-yellow' : 'clay-btn-red';
+                        
+                        $extraPlateBorder = ($isPremium && $dayIndex == 5) ? 'border-[#ff6b6b]/50' : '';
+                    ?>
+                    <div class="clay-card p-8 flex flex-col items-center relative w-full border <?= $cardBorder ?> <?= $revealClass ?>">
+                        <div class="absolute -top-4 right-4 <?= $badgeBg ?> text-white text-sm font-nunito-black px-5 py-2 rounded-full <?= $badgeShadow ?> border <?= $badgeBorder ?>">
+                            <?= $tierName ?> - <?= htmlspecialchars((string)$item['price'], ENT_QUOTES) ?> ৳</div>
+                        <div class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative <?= $extraPlateBorder ?>">
+                            <span class="text-6xl animate-float"><?= htmlspecialchars((string)$item['emoji'], ENT_QUOTES) ?></span>
                         </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">সোনালী মুরগি ভুনা</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            সোনালী মুরগি ভুনা, ভর্তা/ভাজি, ঘন ডাল, সালাদ।</p>
+                        <h3 class="font-nunito-extrabold text-2xl <?= $titleColor ?> mb-4 text-center"><?= htmlspecialchars((string)$item['name'], ENT_QUOTES) ?></h3>
+                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed"><?= htmlspecialchars((string)$item['description'], ENT_QUOTES) ?></p>
                         
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="1">Add Standard</button>
+                        <button type="button" class="<?= $btnClass ?> mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="<?= $item['id'] ?>">Add <?= $tierName ?></button>
                     </div>
-                    <!-- Premium -->
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50 scroll-reveal delay-300">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍗</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">সোনালী মুরগি ভুনা
-                            (Special)</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            সোনালী মুরগি ভুনা, ভর্তা, ভাজি, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="2">Add Premium</button>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-
-                <!-- Sunday (Day 1) -->
-                <div class="day-content hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" data-content="1">
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🐟</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">রুই মাছের ভুনা</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), রুই
-                            মাছের ভুনা, ভাজি/ভর্তা, ঘন ডাল, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="3">Add Standard</button>
-                    </div>
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🐟</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">রুই মাছের ভুনা
-                            (Special)</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), রুই
-                            মাছের ভুনা, ভাজি, ভর্তা, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="4">Add Premium</button>
-                    </div>
-                </div>
-
-                <!-- Monday (Day 2) -->
-                <div class="day-content hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" data-content="2">
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍗</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">সোনালি মুরগির ভুনা</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            সোনালি মুরগির ভুনা, ভাজি/ভর্তা, ঘন ডাল, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="5">Add Standard</button>
-                    </div>
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍗</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">সোনালি মুরগির ভুনা
-                            (Special)</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            সোনালি মুরগির ভুনা, ভাজি, ভর্তা, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="6">Add Premium</button>
-                    </div>
-                </div>
-
-                <!-- Tuesday (Day 3) -->
-                <div class="day-content hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" data-content="3">
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🐠</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">তেলাপিয়া মাছের ভুনা</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), বড়
-                            তেলাপিয়া মাছের ভুনা, ভর্তা/ভাজি, ঘন ডাল, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="7">Add Standard</button>
-                    </div>
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🐠</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">পাবদা মাছের ভুনা
-                        </h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), পাবদা
-                            মাছের ভুনা, ভর্তা, ভাজি, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="8">Add Premium</button>
-                    </div>
-                </div>
-
-                <!-- Wednesday (Day 4) -->
-                <div class="day-content hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" data-content="4">
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍲</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">রুই মাছের ডিমের ভুনা</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), রুই
-                            মাছের ডিমের ভুনা, ভর্তা/ভাজি, ঘন ডাল, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="9">Add Standard</button>
-                    </div>
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🍲</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">রুই মাছের ডিমের ভুনা
-                            (Special)</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট), রুই
-                            মাছের ডিমের ভুনা, ভর্তা, ভাজি, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="10">Add Premium</button>
-                    </div>
-                </div>
-
-                <!-- Thursday (Day 5) -->
-                <div class="day-content hidden grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" data-content="5">
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-[#af0202]/20 hover:border-[#af0202]/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#8e1515] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(142,21,21,0.5)] border border-[#ff6b6b]/50">
-                            Standard - ১৩৫ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative">
-                            <span class="text-6xl animate-float">🥩</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-white mb-4 text-center">মেজবানি গরুর মাংস</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            মেজবানি গরুর মাংস বা সোনালি মুরগির ভুনা, ঘন ডাল, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-red mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="11">Add Standard</button>
-                    </div>
-                    <div
-                        class="clay-card p-8 flex flex-col items-center relative w-full border border-yellow-600/20 hover:border-yellow-600/50">
-                        <div
-                            class="absolute -top-4 right-4 bg-[#966f14] text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-[0_5px_10px_rgba(150,111,20,0.5)] border border-yellow-400/50">
-                            Premium - ১৮০ ৳</div>
-                        <div
-                            class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative border-[#ff6b6b]/50">
-                            <span class="text-6xl animate-float">🥩</span>
-                        </div>
-                        <h3 class="font-nunito-extrabold text-2xl text-yellow-500 mb-4 text-center">মেজবানি গরুর মাংস
-                            (Special)</h3>
-                        <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed">ভাত (মিনিকেট),
-                            মেজবানি গরুর মাংস বা সোনালি মুরগির ভুনা, ডাল ভুনা, সালাদ।</p>
-                        
-                        
-                        <button type="button" class="clay-btn-yellow mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="12">Add Premium</button>
-                    </div>
-                </div>
-
+                <?php endforeach; ?>
             </div> <!-- End menuCardsContainer -->
             
             </div> <!-- End tiffinSection -->
