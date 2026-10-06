@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login — Bondor Bati</title>
+    <link rel="icon" type="image/png" href="../assets/logo.png">
     <link rel="stylesheet" href="../assets/css/google_fonts_2.css">
     <link rel="stylesheet" href="../assets/css/admin-login.css">
 </head>
