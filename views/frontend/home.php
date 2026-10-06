@@ -76,12 +76,12 @@ require __DIR__ . '/partials/header.php';
 
             <!-- Tiffin Section -->
             <div id="tiffinSection" class="w-full flex flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-3xl sm:text-5xl md:text-[60px] text-gray-900 mb-6 sm:mb-12 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-3xl sm:text-5xl md:text-[60px] text-gray-900 my-2 sm:my-3 text-center scroll-reveal">
                     Weekly Menu
                 </h2>
 
             
-                <div class="bg-gray-100 text-black px-6 py-3 rounded-full mb-10 font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
+                <div class="bg-gray-100 text-black px-6 py-3 rounded-full font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
                     <svg class="text-[#CC0000]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     Minimum Order Quantity: 10 Pcs
                 </div>
@@ -349,11 +349,11 @@ require __DIR__ . '/partials/header.php';
 
             <!-- Catering Section -->
             <div id="cateringSection" class="w-full hidden flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-5xl md:text-[60px] text-gray-900 mb-6 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-5xl md:text-[60px] text-gray-900 my-6 text-center scroll-reveal">
                     Event Catering
                 </h2>
                 
-                <div class="bg-gray-100 text-black px-6 py-3 rounded-full mb-10 font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
+                <div class="bg-gray-100 text-black px-6 py-3 rounded-full mb-5 font-nunito-bold flex items-center gap-2 scroll-reveal border border-gray-200 shadow-md">
                     <svg class="text-[#CC0000]" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                     Minimum Order Quantity: 30 Pcs
                 </div>
