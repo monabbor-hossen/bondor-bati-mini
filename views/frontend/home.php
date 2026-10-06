@@ -33,11 +33,11 @@ require __DIR__ . '/partials/header.php';
                     <div
                         class="flex flex-row items-center justify-center lg:justify-start gap-3 sm:gap-5 w-full max-w-[340px] sm:max-w-none sm:w-auto px-0">
                         <button id="heroOrderButton"
-                            class="btn-hero-primary flex-1 sm:flex-initial px-5 py-3 sm:px-10 sm:py-4 text-sm sm:text-lg tracking-wide">
+                            class="btn-hero-primary flex-1 sm:flex-initial px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg tracking-wide whitespace-nowrap">
                             Order Now
                         </button>
                         <button id="heroMenuButton"
-                            class="btn-hero-secondary flex-1 sm:flex-initial px-5 py-3 sm:px-8 sm:py-3.5 text-sm sm:text-base tracking-wide">
+                            class="btn-hero-secondary flex-1 sm:flex-initial px-6 py-3 sm:px-10 sm:py-4 text-base sm:text-lg tracking-wide whitespace-nowrap">
                             View Menu
                         </button>
                     </div>
