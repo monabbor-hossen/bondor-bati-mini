@@ -15,6 +15,7 @@ final readonly class MenuItem
         public string $description,
         public int $price,
         public string $emoji,
+        public ?string $imageUrl,
         public bool $isAvailable,
     ) {
     }
@@ -31,6 +32,7 @@ final readonly class MenuItem
             'description' => $this->description,
             'price' => $this->price,
             'emoji' => $this->emoji,
+            'image_url' => $this->imageUrl,
             'is_available' => $this->isAvailable,
         ];
     }

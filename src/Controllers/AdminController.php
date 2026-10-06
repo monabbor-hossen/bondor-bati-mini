@@ -213,8 +213,27 @@ class AdminController
         try {
             switch ($action) {
                 case 'save_menu_item':
+                    $id = $_POST['id'] ?? null;
+                    $imageUrl = null;
+                    
+                    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                        $uploadDir = dirname(__DIR__, 2) . '/assets/images/menu/';
+                        if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
+                        
+                        $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', basename($_FILES['image']['name']));
+                        $targetPath = $uploadDir . $filename;
+                        
+                        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetPath)) {
+                            $imageUrl = 'assets/images/menu/' . $filename;
+                        }
+                    } else if ($id) {
+                        // Keep existing image if not uploading a new one
+                        $existing = $repo->findMenuItemById((int)$id);
+                        $imageUrl = $existing['image_url'] ?? null;
+                    }
+
                     $repo->saveMenuItem([
-                        'id'          => $_POST['id'] ?? null,
+                        'id'          => $id,
                         'day_index'   => (int)  ($_POST['day_index']   ?? 0),
                         'day_name'    => trim(   $_POST['day_name']    ?? ''),
                         'tier'        =>          $_POST['tier']        ?? 'standard',
@@ -222,6 +241,7 @@ class AdminController
                         'description' => trim(   $_POST['description'] ?? ''),
                         'price'       => (int)  ($_POST['price']       ?? 0),
                         'emoji'       => trim(   $_POST['emoji']       ?? '🍱'),
+                        'image_url'   => $imageUrl,
                     ]);
                     $_SESSION['flash_success'] = 'Menu item saved.';
                     break;

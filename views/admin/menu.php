@@ -24,7 +24,13 @@
                 <tbody>
                 <?php foreach ($menuItems as $item): ?>
                 <tr>
-                    <td class="emoji-cell"><?= e($item['emoji']) ?></td>
+                    <td class="emoji-cell">
+                        <?php if ($item['image_url']): ?>
+                            <img src="<?= e($item['image_url']) ?>" alt="Menu Image" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                        <?php else: ?>
+                            <?= e($item['emoji']) ?>
+                        <?php endif; ?>
+                    </td>
                     <td>
                         <span style="font-weight:600;"><?= e($item['name']) ?></span><br>
                         <span style="font-size:.75rem;color:var(--muted);"><?= e(mb_strimwidth($item['description'], 0, 60, '…')) ?></span>
@@ -58,7 +64,8 @@
                                 data-name="<?= e($item['name']) ?>"
                                 data-description="<?= e($item['description']) ?>"
                                 data-price="<?= (int)$item['price'] ?>"
-                                data-emoji="<?= e($item['emoji']) ?>">Edit</button>
+                                data-emoji="<?= e($item['emoji']) ?>"
+                                data-image_url="<?= e($item['image_url'] ?? '') ?>">Edit</button>
 
                             <form method="POST" action="index.php?page=menu" onsubmit="return confirm('Delete this menu item permanently?')">
                                 <input type="hidden" name="_action" value="delete_menu_item">
@@ -84,7 +91,7 @@
             <span class="modal-title" id="menuModalTitle">Add Menu Item</span>
             <button class="modal-close" id="menuModalClose">×</button>
         </div>
-        <form method="POST" action="index.php?page=menu" id="menuItemForm">
+        <form method="POST" action="index.php?page=menu" id="menuItemForm" enctype="multipart/form-data">
             <input type="hidden" name="_action" value="save_menu_item">
             <input type="hidden" name="_csrf" value="<?= e(csrfToken()) ?>">
             <input type="hidden" name="_page" value="menu">
@@ -115,8 +122,13 @@
                     <input class="form-control" id="mi_price" name="price" type="number" min="1" max="99999" required placeholder="135">
                 </div>
                 <div class="form-group">
-                    <label class="form-label" for="mi_emoji">Emoji</label>
+                    <label class="form-label" for="mi_emoji">Emoji (Fallback)</label>
                     <input class="form-control" id="mi_emoji" name="emoji" required placeholder="🍗">
+                </div>
+                <div class="form-group full">
+                    <label class="form-label" for="mi_image">Image Upload</label>
+                    <input class="form-control" type="file" id="mi_image" name="image" accept="image/*">
+                    <small style="color: var(--muted); font-size: 0.75rem;">Upload a square image for best results. Leave empty to keep existing image or use emoji.</small>
                 </div>
                 <div class="form-group full">
                     <label class="form-label" for="mi_desc">Description</label>
@@ -134,39 +146,3 @@
     </div>
 </div>
 
-<script>
-// ── Day name sync
-const dayNames = <?= json_encode(array_values(array_map(fn($v) => explode(' ', $v)[0], $dayNames)), JSON_UNESCAPED_UNICODE) ?>;
-const dayIndexEl  = document.getElementById('mi_day');
-const dayNameEl   = document.getElementById('mi_day_name');
-function syncDayName() { if (dayIndexEl && dayNameEl) dayNameEl.value = dayNames[dayIndexEl.value] || ''; }
-dayIndexEl?.addEventListener('change', syncDayName);
-
-// ── Menu item modal
-const modal       = document.getElementById('menuModal');
-const modalTitle  = document.getElementById('menuModalTitle');
-const modalIdInput= document.getElementById('menuItemId');
-
-function openModal() { modal.classList.add('open'); }
-function closeModal() { modal.classList.remove('open'); document.getElementById('menuItemForm').reset(); modalIdInput.value = ''; modalTitle.textContent = 'Add Menu Item'; syncDayName(); }
-
-document.getElementById('addMenuBtn')?.addEventListener('click', () => { closeModal(); openModal(); });
-document.getElementById('menuModalClose')?.addEventListener('click', closeModal);
-document.getElementById('menuModalCancel')?.addEventListener('click', closeModal);
-modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-document.querySelectorAll('.edit-menu-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        modalTitle.textContent = 'Edit Menu Item';
-        modalIdInput.value = btn.dataset.id;
-        document.getElementById('mi_name').value        = btn.dataset.name;
-        document.getElementById('mi_day').value         = btn.dataset.day_index;
-        document.getElementById('mi_tier').value        = btn.dataset.tier;
-        document.getElementById('mi_price').value       = btn.dataset.price;
-        document.getElementById('mi_emoji').value       = btn.dataset.emoji;
-        document.getElementById('mi_desc').value        = btn.dataset.description;
-        syncDayName();
-        openModal();
-    });
-});
-</script>

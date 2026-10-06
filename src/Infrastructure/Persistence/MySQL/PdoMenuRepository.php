@@ -17,7 +17,7 @@ final readonly class PdoMenuRepository implements MenuRepository
     public function availableItems(): array
     {
         $statement = $this->pdo->query(
-            'SELECT id, day_index, day_name, tier, name, description, price, emoji, is_available
+            'SELECT id, day_index, day_name, tier, name, description, price, emoji, image_url, is_available
              FROM menu_items
              WHERE is_available = 1
              ORDER BY day_index ASC, FIELD(tier, "standard", "premium"), id ASC'
@@ -34,7 +34,7 @@ final readonly class PdoMenuRepository implements MenuRepository
 
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
         $statement = $this->pdo->prepare(
-            "SELECT id, day_index, day_name, tier, name, description, price, emoji, is_available
+            "SELECT id, day_index, day_name, tier, name, description, price, emoji, image_url, is_available
              FROM menu_items WHERE is_available = 1 AND id IN ($placeholders)"
         );
         $statement->execute(array_values($ids));
@@ -59,6 +59,7 @@ final readonly class PdoMenuRepository implements MenuRepository
             (string) $row['description'],
             (int) $row['price'],
             (string) $row['emoji'],
+            $row['image_url'] ? (string) $row['image_url'] : null,
             (bool) $row['is_available'],
         );
     }

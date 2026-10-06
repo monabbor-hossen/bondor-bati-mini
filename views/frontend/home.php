@@ -78,7 +78,7 @@ require __DIR__ . '/partials/header.php';
 
             <!-- Tiffin Section -->
             <div id="tiffinSection" class="w-full flex flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-2xl sm:text-4xl md:text-5xl text-gray-900 my-2 sm:my-3 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-3xl sm:text-4xl md:text-5xl text-gray-900 my-4 text-center scroll-reveal">
                     Weekly Menu
                 </h2>
 
@@ -137,7 +137,7 @@ require __DIR__ . '/partials/header.php';
                         $badgeShadow = $isPremium ? 'shadow-[0_5px_10px_rgba(150,111,20,0.5)]' : 'shadow-[0_5px_10px_rgba(142,21,21,0.5)]';
                         $tierName = ucfirst($item['tier']);
                         
-                        $titleColor = $isPremium ? 'text-gold' : 'text-primary';
+                        $titleColor = $isPremium ? 'text-gold' : 'text-gray-900';
                         $btnClass = $isPremium ? 'clay-btn-yellow' : 'clay-btn-red';
                         
                         $extraPlateBorder = ($isPremium && $dayIndex == 5) ? 'border-[#ff6b6b]/50' : '';
@@ -145,13 +145,19 @@ require __DIR__ . '/partials/header.php';
                     <div class="clay-card p-8 flex flex-col items-center relative w-full border <?= $cardBorder ?> <?= $revealClass ?>">
                         <div class="absolute -top-4 right-4 <?= $badgeBg ?> text-white text-sm font-nunito-black px-5 py-2 rounded-full <?= $badgeShadow ?> border <?= $badgeBorder ?>">
                             <?= $tierName ?> - <?= htmlspecialchars((string)$item['price'], ENT_QUOTES) ?> ৳</div>
-                        <div class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative <?= $extraPlateBorder ?>">
-                            <span class="text-6xl animate-float"><?= htmlspecialchars((string)$item['emoji'], ENT_QUOTES) ?></span>
-                        </div>
+                        <?php if (!empty($item['image_url'])): ?>
+                            <div class="plate-3d animate-float">
+                                <img src="<?= htmlspecialchars((string)$item['image_url'], ENT_QUOTES) ?>" alt="<?= htmlspecialchars((string)$item['name'], ENT_QUOTES) ?>">
+                            </div>
+                        <?php else: ?>
+                            <div class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative <?= $extraPlateBorder ?>">
+                                <span class="text-6xl animate-float"><?= htmlspecialchars((string)$item['emoji'], ENT_QUOTES) ?></span>
+                            </div>
+                        <?php endif; ?>
                         <h3 class="font-nunito-extrabold text-2xl <?= $titleColor ?> mb-4 text-center"><?= htmlspecialchars((string)$item['name'], ENT_QUOTES) ?></h3>
                         <p class="text-[#a0a0a5] text-[15px] text-center mb-8 h-12 leading-relaxed"><?= htmlspecialchars((string)$item['description'], ENT_QUOTES) ?></p>
                         
-                        <button type="button" class="<?= $btnClass ?> mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="<?= $item['id'] ?>">Add <?= $tierName ?></button>
+                        <button type="button" class="<?= $btnClass ?> mt-auto w-[90%] sm:w-4/5 text-base sm:text-lg py-2.5 sm:py-3 rounded-[20px] add-to-cart" data-item-id="<?= $item['id'] ?>">Add <?= $tierName ?></button>
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -162,7 +168,7 @@ require __DIR__ . '/partials/header.php';
 
             <!-- Catering Section -->
             <div id="cateringSection" class="w-full hidden flex-col items-center transition-opacity duration-300">
-                <h2 class="font-nunito-black text-2xl sm:text-4xl md:text-5xl text-gray-900 my-6 text-center scroll-reveal">
+                <h2 class="font-nunito-black text-3xl sm:text-4xl md:text-5xl text-gray-900 my-6 text-center scroll-reveal">
                     Event Catering
                 </h2>
                 
@@ -243,8 +249,8 @@ require __DIR__ . '/partials/header.php';
                 <div class="swiper-wrapper">
                     <?php $delay = 100; ?>
                     <?php foreach ($successStories as $story): ?>
-                    <div class="swiper-slide h-auto">
-                        <div class="testimonial-card flex flex-col h-full scroll-reveal delay-<?= $delay ?>">
+                    <div class="swiper-slide h-auto p-2">
+                        <div class="testimonial-card flex flex-col h-full scroll-reveal delay-<?= $delay ?> mb-3 mr-3">
                             <div class="flex gap-1 mb-4 text-[#FFB347]">
                                 <?php for ($i = 0; $i < (int)$story['rating']; $i++): ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>

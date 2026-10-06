@@ -24,7 +24,7 @@ final readonly class PdoAdminRepository
     public function allMenuItems(): array
     {
         $statement = $this->pdo->query(
-            'SELECT id, day_index, day_name, tier, name, description, price, emoji, is_available, updated_at
+            'SELECT id, day_index, day_name, tier, name, description, price, emoji, image_url, is_available, updated_at
              FROM menu_items
              ORDER BY day_index ASC, FIELD(tier, "standard", "premium")'
         );
@@ -40,7 +40,7 @@ final readonly class PdoAdminRepository
             $statement = $this->pdo->prepare(
                 'UPDATE menu_items
                  SET day_index = :day_index, day_name = :day_name, tier = :tier,
-                     name = :name, description = :description, price = :price, emoji = :emoji
+                     name = :name, description = :description, price = :price, emoji = :emoji, image_url = :image_url
                  WHERE id = :id'
             );
             $statement->execute([
@@ -52,11 +52,12 @@ final readonly class PdoAdminRepository
                 'description' => (string) $data['description'],
                 'price'       => (int) $data['price'],
                 'emoji'       => (string) $data['emoji'],
+                'image_url'   => $data['image_url'] ?? null,
             ]);
         } else {
             $statement = $this->pdo->prepare(
-                'INSERT INTO menu_items (day_index, day_name, tier, name, description, price, emoji, is_available)
-                 VALUES (:day_index, :day_name, :tier, :name, :description, :price, :emoji, 1)'
+                'INSERT INTO menu_items (day_index, day_name, tier, name, description, price, emoji, image_url, is_available)
+                 VALUES (:day_index, :day_name, :tier, :name, :description, :price, :emoji, :image_url, 1)'
             );
             $statement->execute([
                 'day_index'   => (int) $data['day_index'],
@@ -66,6 +67,7 @@ final readonly class PdoAdminRepository
                 'description' => (string) $data['description'],
                 'price'       => (int) $data['price'],
                 'emoji'       => (string) $data['emoji'],
+                'image_url'   => $data['image_url'] ?? null,
             ]);
         }
     }

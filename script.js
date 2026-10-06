@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const premium = item.tier === 'premium';
         return `<article class="clay-card p-8 flex flex-col items-center relative w-full border ${premium ? 'border-yellow-600/20 hover:border-yellow-600/50' : 'border-[#af0202]/20 hover:border-[#af0202]/50'}">
             <div class="absolute -top-4 right-4 ${premium ? 'bg-[#966f14] border-yellow-400/50' : 'bg-[#8e1515] border-[#ff6b6b]/50'} text-white text-sm font-nunito-black px-5 py-2 rounded-full shadow-lg border">${premium ? 'Premium' : 'Standard'} - ${money(item.price)}</div>
-            <div class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative"><span class="text-6xl animate-float">${escapeHtml(item.emoji)}</span></div>
-            <h3 class="font-nunito-extrabold text-2xl ${premium ? 'text-gold' : 'text-primary'} mb-4 text-center">${escapeHtml(item.name)}</h3>
+              ${item.image_url ? `<div class="plate-3d animate-float"><img src="${escapeHtml(item.image_url)}" alt="${escapeHtml(item.name)}"></div>` : `<div class="plate-container w-40 h-40 rounded-full mb-8 flex items-center justify-center relative"><span class="text-6xl animate-float">${escapeHtml(item.emoji)}</span></div>`}
+            <h3 class="font-nunito-extrabold text-2xl ${premium ? 'text-gold' : 'text-gray-900'} mb-4 text-center">${escapeHtml(item.name)}</h3>
             <p class="text-[#a0a0a5] text-[15px] text-center mb-8 min-h-12 leading-relaxed">${escapeHtml(item.description)}</p>
             <button type="button" class="${premium ? 'clay-btn-yellow' : 'clay-btn-red'} mt-auto w-4/5 text-lg py-3 rounded-[20px] add-to-cart" data-item-id="${item.id}">Add ${premium ? 'Premium' : 'Standard'}</button>
         </article>`;
