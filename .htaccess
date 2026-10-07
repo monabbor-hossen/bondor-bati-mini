@@ -17,6 +17,11 @@ DirectoryIndex index.php
 
     # API routing (kept after the above rules)
     RewriteRule ^api/v1/(.*)$ api/index.php/$1 [QSA,L]
+
+    # Catch all non-existent routes and send to 404.php
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ 404.php [L]
 </IfModule>
 
 <IfModule mod_headers.c>

@@ -49,3 +49,12 @@ if (!function_exists('csrfToken')) {
         return $_SESSION[$key];
     }
 }
+
+// ── Global Base URL ────────────────────────────────────────────────────────────
+// Defined here so all views can use it for absolute asset paths
+if (!defined('BASE_URL')) {
+    $docRoot = str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']));
+    $appRoot = str_replace('\\', '/', __DIR__);
+    $baseUrl = str_replace($docRoot, '', $appRoot);
+    define('BASE_URL', rtrim($baseUrl, '/') . '/');
+}

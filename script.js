@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function loadMenu() {
+        if (!menuContainer) return;
         menuContainer.innerHTML = '<div class="menu-loading"><div><span class="text-5xl">🍱</span><p class="mt-4">Loading this week’s menu…</p></div></div>';
         try {
             const payload = await api('menu');
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderMenu() {
+        if (!menuContainer) return;
         tabs.forEach((tab, index) => { if (menuDays[index]) tab.textContent = menuDays[index].day_name; });
         menuContainer.innerHTML = menuDays.map(day => `
             <div class="day-content ${day.day_index === currentDay ? '' : 'hidden'} grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 fade-in" data-content="${day.day_index}">
@@ -232,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs.forEach((tab, index) => tab.addEventListener('click', () => showDay(index)));
     byId('prevDayBtn')?.addEventListener('click', () => showDay(currentDay - 1));
     byId('nextDayBtn')?.addEventListener('click', () => showDay(currentDay + 1));
-    menuContainer.addEventListener('click', event => { 
+    menuContainer?.addEventListener('click', event => { 
         const button = event.target.closest('.add-to-cart'); 
         if (button) {
             const card = button.closest('.clay-card');
