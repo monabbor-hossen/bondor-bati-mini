@@ -22,8 +22,11 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 150px;
+}
+
+html[data-scroll-behavior="smooth"] {
+  scroll-behavior: smooth;
 }
 
 body {

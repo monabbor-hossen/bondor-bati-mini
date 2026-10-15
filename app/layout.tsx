@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${nunito.variable} ${plusJakartaSans.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${nunito.variable} ${plusJakartaSans.variable}`}>
       <body className="bg-white text-gray-900 antialiased selection:bg-red-100 selection:text-red-900">
         {children}
       </body>
