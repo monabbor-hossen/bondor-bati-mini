@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 CREATE TABLE IF NOT EXISTS success_stories (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     client_name VARCHAR(100) NOT NULL,
+    avatar_url VARCHAR(500) NULL DEFAULT NULL,
     rating TINYINT UNSIGNED NOT NULL DEFAULT 5,
     content TEXT NOT NULL,
     is_visible BOOLEAN NOT NULL DEFAULT TRUE,
@@ -118,3 +119,62 @@ INSERT IGNORE INTO success_stories (id, client_name, rating, content, is_visible
   (1, 'Sadia Rahman', 5, 'The Bride Menu was an absolute hit at our wedding! The whole roasted lamb was cooked to perfection and the presentation was exactly what we wanted.', 1),
   (2, 'Tanvir Ahmed', 5, 'Bondor Bati''s Weekly Tiffin feels like a warm hug from home. Authentic Chittagong flavors that I can enjoy at my office desk. Highly recommended!', 1),
   (3, 'Fahim Hasan', 5, 'Ordered the Box Menu for our corporate event (50 pax). Smooth delivery, hot food, and everyone loved the Kacchi Biriyani!', 1);
+
+-- ── Catering Menus (Event packages) ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS catering_menus (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    category ENUM('regular', 'premium', 'holud', 'bride', 'box') NOT NULL DEFAULT 'regular',
+    badge_text VARCHAR(50) NOT NULL DEFAULT '',
+    title VARCHAR(160) NOT NULL,
+    items TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY idx_catering_category (category, is_active)
+) ENGINE=InnoDB;
+
+INSERT IGNORE INTO catering_menus (id, category, badge_text, title, items, is_active) VALUES
+  (1, 'regular', 'REG-1', 'Traditional Feast', 'Plain Polao, Chicken Roast, Beef Rezala, Borhani, Firni, Salad', 1),
+  (2, 'premium', 'PREM-1', 'Chittagong Heritage', 'Kacchi Biriyani, Chicken Roast, Beef Kala Bhuna, Borhani, Jorda, Salad', 1),
+  (3, 'holud', 'HLD-1', 'Holud Special Platter', 'Khichuri, Fried Hilsha, Begun Bhaja, Chicken Roast, Chutney, Payesh', 1),
+  (4, 'bride', 'BRD-1', 'Royal Wedding Package', 'Basmati Kacchi Biriyani, Whole Roast Lamb, Chicken Roast, Shahi Tikka, Borhani, Firni, Paan Platter', 1),
+  (5, 'box', 'BOX-1', 'Executive Box Meal', 'Chicken Biriyani / Polao, Chicken Roast, Egg, Salad, Borhani, Water', 1);
+
+-- ── Admin Users ───────────────────────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS admins (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(120) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('superadmin', 'manager') NOT NULL DEFAULT 'manager',
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_admin_username (username),
+    UNIQUE KEY uq_admin_email (email),
+    KEY idx_admin_status (is_active)
+) ENGINE=InnoDB;
+
+-- Default superadmin user (admin / admin123)
+-- bcrypt hash for 'admin123' is $2a$10$w8Pj5fC/5z6bL8XlTqk3g.mG09jIeqzQkF03iE6rI9d7aB1a8pTje (or compatible)
+INSERT IGNORE INTO admins (id, name, username, email, password_hash, role, is_active) VALUES
+  (1, 'Super Administrator', 'admin', 'admin@bondorbati.com', '$2a$10$N.ZpS0b6LkVqYxG2W2pQae8U51/0h15rP4f4lQGzWj2Qj7xYt26jW', 'superadmin', 1);
+
+-- ── Marquee Scrolling Bar Notices ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS marquee_notices (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(255) NOT NULL,
+    icon VARCHAR(32) NOT NULL DEFAULT '📢',
+    display_order INT UNSIGNED NOT NULL DEFAULT 0,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY idx_marquee_active (is_active, display_order)
+) ENGINE=InnoDB;
+
+INSERT IGNORE INTO marquee_notices (id, text, icon, display_order, is_active) VALUES
+  (1, 'Order Cut-off Time: 10:00 PM for Next Day Lunch', '⏰', 1, 1),
+  (2, 'Serving specific delivery zones in Dhaka', '🚚', 2, 1),
+  (3, 'Authentic Chittagong Heritage Cuisine', '🍱', 3, 1);
+
